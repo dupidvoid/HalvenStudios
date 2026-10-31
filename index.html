@@ -1,1 +1,342 @@
-<!DOCTYPE: html>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halven Studios</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#121214;--panel:#202024;--panel2:#2a2a30;--text:#f5f5f7;--muted:#a6a6b0;--accent:#0078f2;--accent-t:#fff;--line:#34343b;
+ --bar:#0c0c0e;--bartext:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#eceef2;--panel:#fff;--panel2:#e2e5ec;--text:#16171b;--muted:#5b5f6b;--line:#cfd3dc;--bar:#eceef2;--bartext:#16171b}
+:root[data-theme="pink"]{--bg:#1a0c16;--panel:#2b1425;--panel2:#3a1a31;--text:#fff1f8;--muted:#c9a0b9;--accent:#ff2d8a;--line:#4a2440;--bar:#12060f}
+html{scroll-padding-top:90px}
+*{box-sizing:border-box}
+body{margin:0;font-size:1.125rem;background:var(--bg);color:var(--text);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;transition:background .25s,color .25s}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 32px;border-bottom:1px solid var(--line);box-shadow:0 10px 30px -12px rgba(0,0,0,.35)}
+.brand{grid-column:2;color:var(--bartext);font-weight:800;font-size:2.1rem;letter-spacing:.04em;text-align:center;cursor:pointer;user-select:none;background:none;border:0;font-family:inherit;padding:4px 8px}
+nav{grid-column:1;grid-row:1;display:flex;flex-wrap:wrap;gap:6px 22px}
+nav a{position:relative;padding:6px 0;color:var(--bartext);opacity:.8;text-decoration:none;font-weight:600;font-size:1.05rem}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .2s}
+nav a:hover,nav a:focus-visible{opacity:1}
+nav a:hover::after,nav a:focus-visible::after{transform:scaleX(1)}
+.modes{grid-column:3;grid-row:1;justify-self:end;display:flex;gap:4px;background:#1c1c21;border-radius:999px;padding:3px}
+.modes button{border:0;background:none;color:#c9c9d1;font:600 .8rem "Barlow",sans-serif;padding:6px 12px;border-radius:999px;cursor:pointer}
+.modes button[aria-pressed="true"]{background:#fff;color:#000}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hero{min-height:46vh;display:grid;align-content:center;padding:64px 24px;max-width:1100px;margin:0 auto}
+.hero h1{font-size:clamp(2.6rem,8vw,5.6rem);line-height:.98;margin:0 0 20px;font-weight:800;max-width:12ch}
+.hero p{color:var(--text);font-size:clamp(2.2rem,6.5vw,4.4rem);font-weight:800;line-height:1;max-width:18ch;margin:0 0 32px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:17px 34px;border-radius:6px;font-weight:800;text-decoration:none;font-size:1.3rem}
+.btn.main{background:var(--accent);color:var(--accent-t)}
+.btn.alt{background:var(--panel2);color:var(--text)}
+.btn:hover{filter:brightness(1.12)}
+section{max-width:1100px;margin:0 auto;padding:48px 24px}
+h2{font-size:2.6rem;margin:0 0 22px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:var(--panel);border-radius:10px;overflow:hidden;transition:transform .2s}
+.card:hover{transform:translateY(-4px)}
+.art{aspect-ratio:3/4;display:grid;place-items:end start;padding:16px;font-weight:800;font-size:1.5rem;color:#fff;line-height:1.05}
+.a1{background:linear-gradient(160deg,#ff7a18,#7a1d00 70%,#1b0900)}
+.a2{background:linear-gradient(160deg,#27d3b5,#0b4f6c 70%,#04121a)}
+.a3{background:linear-gradient(160deg,#8be04e,#1f5a2a 70%,#07150a)}
+.a4{background:linear-gradient(160deg,#9b6bff,#2a1a6e 70%,#0a0620)}
+.meta{padding:14px 16px}
+.meta b{display:block;font-size:1.4rem}
+.meta span{color:var(--muted);font-size:1.15rem}
+.about{display:block}.about>div{max-width:58ch}.stats{display:none}
+.about p{color:var(--muted);font-size:1.5rem;margin:0 0 14px}
+.stats{display:grid;gap:12px}
+.stat{background:var(--panel);border-radius:10px;padding:16px 20px}
+.stat b{font-size:1.5rem}
+.stat span{display:block;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:32px 24px;text-align:center;color:var(--muted);font-size:1.1rem}
+#secret{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--muted);opacity:.35;border:0;padding:0;margin-left:8px;cursor:pointer;vertical-align:middle}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);background:#fff;color:#000;font-weight:800;padding:12px 22px;border-radius:8px;opacity:0;transition:.3s;z-index:20;pointer-events:none;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.bit{position:fixed;top:-20px;width:12px;height:12px;z-index:15;pointer-events:none;animation:fall 2.6s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.spin{animation:spin .8s}
+.gear{grid-column:3;grid-row:1;justify-self:end;background:none;color:var(--bartext);border:0;border-radius:50%;padding:10px;transition:background .2s;cursor:pointer;display:grid;place-items:center;line-height:0}
+.gear svg{width:30px;height:30px;transition:transform .7s ease}
+.gear:hover svg,.gear:focus-visible svg{transform:rotate(360deg)}
+.gear.gone{visibility:hidden}
+.gear:hover{background:var(--panel)}
+
+#bgimg{position:fixed;inset:0;background-size:cover;background-position:center;opacity:.3;z-index:0;pointer-events:none}
+main{position:relative;z-index:1}
+.art{background-size:cover;background-position:center;position:relative}
+.pfp{width:60px;height:60px;border-radius:50%;object-fit:cover;border:3px solid var(--panel)}
+.meta p{color:var(--muted);font-size:1.1rem;margin:6px 0 0}
+#empty,#wipempty{color:var(--muted);font-size:1.3rem}
+#join p{font-size:1.5rem}
+.panel{position:fixed;top:0;right:0;bottom:0;width:min(380px,100%);background:var(--panel);color:var(--text);z-index:30;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));overflow:auto;border-left:1px solid var(--line);box-shadow:-12px 0 40px rgba(0,0,0,.4)}
+.panel[hidden]{display:none}
+.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ph h3{margin:0;font-size:1.3rem;font-weight:800}
+.x{background:var(--panel2);color:var(--text);border:0;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem}
+.panel h4{margin:22px 0 10px;font-size:1rem;font-weight:800}
+.panel label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:12px}
+.panel input,.panel textarea{display:block;width:100%;margin-top:4px;padding:9px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit}
+.panel textarea{min-height:70px;resize:vertical}
+.panel .btn{border:0;cursor:pointer;font-family:inherit;margin-top:4px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.row button{background:none;border:1px solid var(--line);color:var(--text);border-radius:6px;padding:4px 10px;cursor:pointer;font:inherit}
+.hint{color:var(--muted);font-size:.85rem;margin:8px 0 0}
+[hidden]{display:none!important}
+.pick{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.pick input{width:64px;height:40px;padding:0;border:0;background:none;cursor:pointer}
+#visits{margin-left:6px}
+.credits{display:grid;gap:10px;color:var(--muted);font-size:1.5rem}
+.credits b{color:var(--text)}
+.panel .chk{display:flex;align-items:center;gap:8px}
+.panel .chk input{width:auto;margin:0}
+.dc{display:inline-grid;place-items:center;padding:11px 16px}
+.dc svg{width:38px;height:38px;fill:currentColor}
+@keyframes spin{to{transform:rotate(360deg)}}
+main>.page{display:none;min-height:70vh}
+body[data-view="games"] #games,body[data-view="wip"] #wip,body[data-view="credits"] #credits,body[data-view="join"] #join{display:block}
+body:not([data-view="home"]) .hero,body:not([data-view="home"]) #about{display:none}
+.back{display:inline-block;margin-bottom:20px;padding:10px 20px;border-radius:6px;background:var(--panel);color:var(--text);font-weight:800;font-size:1.2rem;text-decoration:none}
+.back:hover{background:var(--accent);color:var(--accent-t)}
+nav a.on{opacity:1}
+nav a.on::after{transform:scaleX(1)}
+@media(max-width:760px){
+ header{grid-template-columns:1fr;gap:10px;justify-items:center;padding:12px 16px}
+ .brand,nav,.modes,.gear{grid-column:1;grid-row:auto;justify-self:center}
+ .about{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-view="home">
+<header>
+ <nav aria-label="Main"><a href="#games">Games</a><a href="#wip">WIP</a><a href="#credits">Credits</a><a href="https://discord.gg/6hHF66cp86" target="_blank" rel="noopener">Studio</a><a href="#join">Join us</a></nav>
+ <button class="brand" id="brand" aria-label="Halven Studios">Halven Studios</button>
+ <button class="gear" id="gear" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+</header>
+<div id="bgimg"></div>
+
+<main>
+<div class="hero">
+ <p>We make games. The first ones are still in the works.</p>
+ <div class="btns"><a class="btn main" href="#games">Games</a><a class="btn alt dc" href="https://discord.gg/6hHF66cp86" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a></div>
+</div>
+
+<section id="games" class="page">
+ <a class="back" href="#">&lt;— Back</a>
+ <h2>Our games</h2>
+ <div class="grid" id="grid">
+ </div>
+ <p id="empty" hidden>No games yet. New games will show up here soon.</p>
+</section>
+
+<section id="wip" class="page">
+ <a class="back" href="#">&lt;— Back</a>
+ <h2>WIP</h2>
+ <div class="grid" id="wipgrid"></div>
+ <p id="wipempty" hidden>Nothing in progress yet.</p>
+</section>
+
+<section id="about" class="about">
+ <div>
+  <h2>The studio</h2>
+  <p>Halven Studios is a game studio. We post updates and run playtests on our Discord.</p>
+ </div>
+ <div class="stats">
+ </div>
+</section>
+
+<section id="credits" class="page">
+ <a class="back" href="#">&lt;— Back</a>
+ <h2>Credits</h2>
+ <div class="credits">
+  <span><b>Dingle</b> = Website / Bot Developer.</span>
+  <span><b>SlySeeker377221</b> = Main Founder.</span>
+  <span><b>GhOsT2X</b> = Co - Founder.</span>
+ </div>
+</section>
+
+<section id="join" class="page">
+ <a class="back" href="#">&lt;— Back</a>
+ <h2>Join us</h2>
+ <p style="color:var(--muted);max-width:52ch;margin:0 0 20px">Want to work with us? Say hi on Discord.</p>
+ <a class="btn main" href="https://discord.gg/6hHF66cp86" target="_blank" rel="noopener">Join the Discord</a>
+</section>
+</main>
+
+<footer>© 2026 Halven Studios. All rights reserved. <span id="visits"></span><button id="secret" aria-label="Secret"></button></footer>
+<aside class="panel" id="p-set" hidden aria-label="Settings">
+ <div class="ph"><h3>Settings</h3><button class="x" data-close aria-label="Close">✕</button></div>
+ <h4>Theme</h4>
+ <div class="modes" role="group" aria-label="Color mode">
+  <button data-m="dark" aria-pressed="true">Dark</button>
+  <button data-m="light" aria-pressed="false">Light</button>
+  <button data-m="pink" aria-pressed="false">Pink</button>
+  <button data-m="custom" aria-pressed="false">Custom</button>
+ </div>
+ <label class="pick">Pick your own color<input type="color" id="c-pick" value="#0078f2"></label>
+ <label class="pick">Top bar text color<input type="color" id="t-pick" value="#ffffff"></label>
+ <button class="btn alt" id="t-reset">Reset top bar color</button>
+ <p class="hint">Your theme and color are saved and applied every time you visit.</p>
+ <div id="dev-entry" hidden>
+  <h4>Developer</h4>
+  <button class="btn alt" id="open-dev">Open developer panel</button>
+ </div>
+</aside>
+<aside class="panel" id="p-dev" hidden aria-label="Developer panel">
+ <div class="ph"><h3>Developer panel</h3><button class="x" data-close aria-label="Close">✕</button></div>
+ <div id="lock">
+  <h4 id="lock-title">Owner sign-in</h4>
+  <p class="hint" id="lock-msg">Only the site owner can open this panel.</p>
+  <button class="btn main" id="pw-go">Sign in with Google</button>
+ </div>
+ <div id="devbody" hidden>
+ <h4>Add a game</h4>
+ <label>Name<input id="g-name" maxlength="60"></label>
+ <label>Status<input id="g-status" maxlength="60" placeholder="Coming soon"></label>
+ <label>Description<textarea id="g-desc" maxlength="200"></textarea></label>
+ <label>Profile picture<input type="file" id="g-icon" accept="image/*"></label>
+ <label>Background image<input type="file" id="g-bg" accept="image/*"></label>
+ <label class="chk"><input type="checkbox" id="g-wip"> Show in WIP</label>
+ <button class="btn main" id="g-add">Add game</button>
+ <h4>Your games</h4>
+ <div id="g-list"></div>
+ <h4>Site background</h4>
+ <label>Background image<input type="file" id="s-bg" accept="image/*"></label>
+ <button class="btn alt" id="s-clear">Remove background</button>
+ <p class="hint">Games and images are saved in this browser only.</p>
+ <h4>Account</h4>
+ <button class="btn alt" id="pw-change">Sign out</button>
+ </div>
+</aside>
+<div id="toast" role="status"></div>
+
+<script>
+(function(){
+ var root=document.documentElement,toast=document.getElementById('toast'),tt;
+ function say(t){toast.textContent=t;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on')},2600)}
+ function setMode(m){
+  ['--bg','--panel','--panel2','--line','--bar','--accent','--accent-t','--text','--muted'].forEach(function(v){root.style.removeProperty(v)});root.setAttribute('data-theme',m);if(m==='custom')applyCustom();
+  document.querySelectorAll('.modes button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.m===m))});
+  try{localStorage.setItem('halven-mode',m)}catch(e){}
+ }
+ try{var s=localStorage.getItem('halven-mode');if(s)setMode(s)}catch(e){}
+ document.querySelectorAll('.modes button').forEach(function(b){b.addEventListener('click',function(){setMode(b.dataset.m)})});
+
+ function burst(){
+  var c=['#0078f2','#ff2d8a','#27d3b5','#ffd23f','#fff'];
+  for(var i=0;i<60;i++){var d=document.createElement('div');d.className='bit';
+   d.style.left=Math.random()*100+'vw';d.style.background=c[i%c.length];
+   d.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(d);
+   setTimeout(function(x){x.remove()},3600,d)}
+ }
+ // Egg 1: Konami code
+ var k=[38,38,40,40,37,39,37,39,66,65],ki=0;
+ // Egg 3: type "halven"
+ var w='halven',wi=0;
+ document.addEventListener('keydown',function(e){
+  ki=(e.keyCode===k[ki])?ki+1:(e.keyCode===k[0]?1:0);
+  if(ki===k.length){ki=0;burst();say('Cheat code accepted. +30 lives.')}
+  var ch=(e.key||'').toLowerCase();
+  wi=(ch===w[wi])?wi+1:(ch===w[0]?1:0);
+  if(wi===w.length){wi=0;say('Hi there. You typed our name!');root.style.setProperty('--accent','#ffd23f');root.style.setProperty('--accent-t','#000')}
+ });
+ // Egg 2: click the name 5 times
+ var n=0,nt,brand=document.getElementById('brand');
+ brand.addEventListener('click',function(){
+  n++;clearTimeout(nt);nt=setTimeout(function(){n=0},900);
+  if(n>=5){n=0;brand.classList.remove('spin');void brand.offsetWidth;brand.classList.add('spin');say('Level 2 unlocked: you clicked fast.')}
+ });
+ // Egg 4: secret dot
+ document.getElementById('secret').addEventListener('click',function(){burst();say('You found the hidden dot.')});
+ var K='halven-data',data={games:[],bg:''};
+ try{var raw=localStorage.getItem(K);if(raw){var p=JSON.parse(raw);data.games=p.games||[];data.bg=p.bg||''}}catch(e){}
+ function save(){try{localStorage.setItem(K,JSON.stringify(data));return true}catch(e){say('Storage is full. Try smaller images.');return false}}
+ function $(id){return document.getElementById(id)}
+ function shrink(file,max,type){return new Promise(function(res){if(!file)return res('');var fr=new FileReader();fr.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL(type,.82))};im.onerror=function(){res('')};im.src=fr.result};fr.onerror=function(){res('')};fr.readAsDataURL(file)})}
+ function render(){
+  var g=$('grid'),w=$('wipgrid');g.innerHTML='';w.innerHTML='';$('empty').hidden=data.games.some(function(x){return !x.wip});$('wipempty').hidden=data.games.some(function(x){return x.wip});
+  data.games.forEach(function(x){
+   var a=document.createElement('article');a.className='card';
+   var art=document.createElement('div');art.className='art';
+   art.style.backgroundImage=x.bg?'linear-gradient(to top,rgba(0,0,0,.65),transparent 60%),url('+x.bg+')':'linear-gradient(160deg,var(--panel2),var(--bg))';
+   art.style.display='flex';art.style.alignItems='flex-end';
+   if(x.icon){var im=document.createElement('img');im.src=x.icon;im.alt='';im.className='pfp';art.appendChild(im)}
+   var m=document.createElement('div');m.className='meta';
+   var b=document.createElement('b');b.textContent=x.name;m.appendChild(b);
+   if(x.status){var s=document.createElement('span');s.textContent=x.status;m.appendChild(s)}
+   if(x.desc){var d=document.createElement('p');d.textContent=x.desc;m.appendChild(d)}
+   a.appendChild(art);a.appendChild(m);(x.wip?w:g).appendChild(a)});
+  var l=$('g-list');l.innerHTML='';
+  data.games.forEach(function(x,i){var r=document.createElement('div');r.className='row';var t=document.createElement('span');t.textContent=x.name;var bt=document.createElement('button');bt.textContent='Delete';bt.addEventListener('click',function(){data.games.splice(i,1);save();render()});r.appendChild(t);r.appendChild(bt);l.appendChild(r)});
+  $('bgimg').style.backgroundImage=data.bg?'url('+data.bg+')':'none';
+ }
+ function openP(id){document.querySelectorAll('.panel').forEach(function(p){p.hidden=true});$(id).hidden=false;$('gear').classList.add('gone')}
+ function closeP(){document.querySelectorAll('.panel').forEach(function(p){p.hidden=true});$('gear').classList.remove('gone')}
+ $('gear').addEventListener('click',function(){openP('p-set')});
+ $('open-dev').addEventListener('click',function(){openP('p-dev')});
+ document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',closeP)});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeP()});
+ $('g-add').addEventListener('click',function(){
+  var name=$('g-name').value.trim();if(!name){say('Enter a game name first.');return}
+  Promise.all([shrink($('g-icon').files[0],256,'image/png'),shrink($('g-bg').files[0],900,'image/jpeg')]).then(function(r){
+   data.games.push({name:name,status:$('g-status').value.trim(),desc:$('g-desc').value.trim(),icon:r[0],bg:r[1],wip:$('g-wip').checked});
+   if(save()){['g-name','g-status','g-desc','g-icon','g-bg'].forEach(function(i){$(i).value=''});$('g-wip').checked=false;say('Game added.')}else{data.games.pop()}
+   render()})});
+ $('s-bg').addEventListener('change',function(){shrink(this.files[0],1600,'image/jpeg').then(function(u){if(!u)return;var old=data.bg;data.bg=u;if(!save())data.bg=old;render()})});
+ $('s-clear').addEventListener('click',function(){data.bg='';save();render()});
+ render();
+ var OWNER_UID='1QAd8LjUlWYjUsTJDebSsQOM8yz1'; /* After your first sign-in, paste your UID here. */
+ var fbOK,fbp=new Promise(function(r){fbOK=r}),isOwner=false;
+ function showDev(){$('lock').hidden=true;$('devbody').hidden=false}
+ function ownerState(u){
+  isOwner=!!(u&&OWNER_UID&&u.uid===OWNER_UID);
+  $('dev-entry').hidden=!isOwner;
+  if(isOwner){showDev();return}
+  $('devbody').hidden=true;$('lock').hidden=false;
+  if(!u){$('lock-msg').textContent='Only the site owner can open this panel.';$('pw-go').hidden=false}
+  else if(!OWNER_UID){$('lock-msg').textContent='Signed in. Your UID is '+u.uid+'. Paste it into OWNER_UID in index.html to finish setup.';$('pw-go').hidden=true}
+  else{$('lock-msg').textContent='This account is not the site owner.';$('pw-go').hidden=false}
+ }
+ $('pw-go').addEventListener('click',function(){
+  if(!window.firebase||!firebase.auth){say('Sign-in only works on your hosted site.');return}
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(){say('Sign-in failed.')})});
+ $('pw-change').addEventListener('click',function(){
+  if(window.firebase&&firebase.auth)firebase.auth().signOut().then(function(){closeP()})});
+
+ function hsl(c){var r=parseInt(c.slice(1,3),16)/255,g=parseInt(c.slice(3,5),16)/255,b=parseInt(c.slice(5,7),16)/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),h=0,s=0,l=(mx+mn)/2,d=mx-mn;if(d){s=d/(1-Math.abs(2*l-1));if(mx===r)h=((g-b)/d)%6;else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h=Math.round(h*60);if(h<0)h+=360}return[h,Math.round(s*100)]}
+ function applyCustom(){
+  var c='#0078f2';try{c=localStorage.getItem('halven-color')||c}catch(e){}
+  var x=hsl(c),h=x[0],s=Math.min(60,Math.max(25,x[1])),st=root.style;
+  st.setProperty('--bg','hsl('+h+','+s+'%,8%)');st.setProperty('--panel','hsl('+h+','+s+'%,13%)');st.setProperty('--panel2','hsl('+h+','+s+'%,19%)');st.setProperty('--line','hsl('+h+','+s+'%,24%)');st.setProperty('--bar','hsl('+h+','+s+'%,5%)');st.setProperty('--muted','hsl('+h+',20%,70%)');st.setProperty('--accent',c);
+  var r=parseInt(c.slice(1,3),16),g=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);
+  st.setProperty('--accent-t',(r*299+g*587+b*114)/1000>150?'#000':'#fff');$('c-pick').value=c}
+ $('c-pick').addEventListener('input',function(){try{localStorage.setItem('halven-color',this.value)}catch(e){}setMode('custom')});
+
+ var FIREBASE_CONFIG={apiKey:"AIzaSyAIEvDSxT1QeaQfYNALDVwiBd1UOvqN-Jo",authDomain:"halvenstudios.firebaseapp.com",projectId:"halvenstudios",storageBucket:"halvenstudios.firebasestorage.app",messagingSenderId:"141233457505",appId:"1:141233457505:web:d530f366b9329de1b51d20"};
+ function localVisits(){var n=0;try{n=+localStorage.getItem('halven-visits')||0;if(!sessionStorage.getItem('halven-seen')){n++;localStorage.setItem('halven-visits',n);sessionStorage.setItem('halven-seen','1')}}catch(e){}return n}
+ function showVisits(n){$('visits').textContent='Visits: '+n.toLocaleString('en')}
+ function loadFB(){
+  var base='https://www.gstatic.com/firebasejs/10.12.2/';
+  function ld(f){return new Promise(function(ok,no){var s=document.createElement('script');s.src=base+f;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+  ld('firebase-app-compat.js').then(function(){return ld('firebase-auth-compat.js')}).then(function(){return ld('firebase-firestore-compat.js')}).then(function(){
+   firebase.initializeApp(FIREBASE_CONFIG);fbOK();
+   var ref=firebase.firestore().collection('site').doc('stats'),first=true;
+   try{first=!sessionStorage.getItem('halven-seen');sessionStorage.setItem('halven-seen','1')}catch(e){}
+   return (first?ref.set({visits:firebase.firestore.FieldValue.increment(1)},{merge:true}):Promise.resolve()).then(function(){return ref.get()})
+  }).then(function(d){showVisits((d.data()||{}).visits||0)}).catch(function(){showVisits(localVisits())})}
+ if(FIREBASE_CONFIG){loadFB();fbp.then(function(){firebase.auth().onAuthStateChanged(ownerState)})}else showVisits(localVisits());
+ function applyBar(){var c=null;try{c=localStorage.getItem('halven-bartext')}catch(e){}if(c){root.style.setProperty('--bartext',c);$('t-pick').value=c}else root.style.removeProperty('--bartext')}
+ $('t-pick').addEventListener('input',function(){try{localStorage.setItem('halven-bartext',this.value)}catch(e){}root.style.setProperty('--bartext',this.value)});
+ $('t-reset').addEventListener('click',function(){try{localStorage.removeItem('halven-bartext')}catch(e){}root.style.removeProperty('--bartext');$('t-pick').value='#ffffff'});
+ applyBar();
+ var views=['games','wip','credits','join'];
+ function route(){var v=location.hash.slice(1);if(v==='owner')openP('p-dev');if(views.indexOf(v)<0)v='home';document.body.setAttribute('data-view',v);document.querySelectorAll('nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+v)});window.scrollTo(0,0)}
+ window.addEventListener('hashchange',route);route();
+ try{console.log('%cHalven Studios','font:800 20px sans-serif','Peeking at the code? We’re hiring.')}catch(e){}
+})();
+</script>
+</body>
+</html>
