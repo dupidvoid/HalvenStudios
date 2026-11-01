@@ -10,9 +10,9 @@
  --bar:#0c0c0e;--bartext:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 :root[data-theme="light"]{--bg:#eceef2;--panel:#fff;--panel2:#e2e5ec;--text:#16171b;--muted:#5b5f6b;--line:#cfd3dc;--bar:#eceef2;--bartext:#16171b}
 :root[data-theme="pink"]{--bg:#1a0c16;--panel:#2b1425;--panel2:#3a1a31;--text:#fff1f8;--muted:#c9a0b9;--accent:#ff2d8a;--line:#4a2440;--bar:#12060f}
-html{scroll-padding-top:90px}
+html{scroll-padding-top:90px;font-size:var(--fs,100%)}
 *{box-sizing:border-box}
-body{margin:0;font-size:1.125rem;background:var(--bg);color:var(--text);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;transition:background .25s,color .25s}
+body{margin:0;font-size:1.125rem;background:var(--bg);color:var(--text);font-family:var(--ff,"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif);line-height:1.5;transition:background .25s,color .25s}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 32px;border-bottom:1px solid var(--line);box-shadow:0 10px 30px -12px rgba(0,0,0,.35)}
 .brand{grid-column:2;color:var(--bartext);font-weight:800;font-size:2.1rem;letter-spacing:.04em;text-align:center;cursor:pointer;user-select:none;background:none;border:0;font-family:inherit;padding:4px 8px}
 nav{grid-column:1;grid-row:1;display:flex;flex-wrap:wrap;gap:6px 22px}
@@ -28,14 +28,14 @@ nav a:hover::after,nav a:focus-visible::after{transform:scaleX(1)}
 .hero h1{font-size:clamp(2.6rem,8vw,5.6rem);line-height:.98;margin:0 0 20px;font-weight:800;max-width:12ch}
 .hero p{color:var(--text);font-size:clamp(2.2rem,6.5vw,4.4rem);font-weight:800;line-height:1;max-width:18ch;margin:0 0 32px}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;padding:17px 34px;border-radius:6px;font-weight:800;text-decoration:none;font-size:1.3rem}
+.btn{display:inline-block;padding:17px 34px;border-radius:var(--rb,6px);font-weight:800;text-decoration:none;font-size:1.3rem}
 .btn.main{background:var(--accent);color:var(--accent-t)}
 .btn.alt{background:var(--panel2);color:var(--text)}
 .btn:hover{filter:brightness(1.12)}
 section{max-width:1100px;margin:0 auto;padding:48px 24px}
 h2{font-size:2.6rem;margin:0 0 22px;font-weight:800}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-.card{background:var(--panel);border-radius:10px;overflow:hidden;transition:transform .2s}
+.card{background:var(--panel);border-radius:var(--r,10px);overflow:hidden;transition:transform .2s}
 .card:hover{transform:translateY(-4px)}
 .art{aspect-ratio:3/4;display:grid;place-items:end start;padding:16px;font-weight:800;font-size:1.5rem;color:#fff;line-height:1.05}
 .a1{background:linear-gradient(160deg,#ff7a18,#7a1d00 70%,#1b0900)}
@@ -84,6 +84,17 @@ main{position:relative;z-index:1}
 .row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
 .row button{background:none;border:1px solid var(--line);color:var(--text);border-radius:6px;padding:4px 10px;cursor:pointer;font:inherit}
 .hint{color:var(--muted);font-size:.85rem;margin:8px 0 0}
+.panel select{display:block;width:100%;margin-top:4px;padding:9px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit}
+.panel input[type=range]{padding:0}
+html.nomo *{animation:none!important;transition:none!important}
+html.novis #visits{display:none}
+.center{grid-column:2;grid-row:1;position:relative;display:flex;justify-content:center}
+#cd{position:absolute;left:100%;top:50%;transform:translateY(-50%);margin-left:20px;display:flex;align-items:baseline;gap:10px;padding:6px 16px;border-radius:999px;border:2px solid var(--cd,var(--accent));background:var(--panel);color:var(--bartext);font-weight:800;font-size:1rem;white-space:nowrap}
+#cd b{color:var(--cd,var(--accent));font-variant-numeric:tabular-nums;font-size:1.2rem}
+@media(max-width:1000px){.center{flex-direction:column;align-items:center}#cd{position:static;transform:none;margin:8px 0 0}}
+.panel input[type=color]{height:42px;padding:2px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.trio input{margin-top:0}
 [hidden]{display:none!important}
 .pick{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
 .pick input{width:64px;height:40px;padding:0;border:0;background:none;cursor:pointer}
@@ -104,7 +115,7 @@ nav a.on{opacity:1}
 nav a.on::after{transform:scaleX(1)}
 @media(max-width:760px){
  header{grid-template-columns:1fr;gap:10px;justify-items:center;padding:12px 16px}
- .brand,nav,.modes,.gear{grid-column:1;grid-row:auto;justify-self:center}
+ .center,nav,.modes,.gear{grid-column:1;grid-row:auto;justify-self:center}
  .about{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -113,7 +124,7 @@ nav a.on::after{transform:scaleX(1)}
 <body data-view="home">
 <header>
  <nav aria-label="Main"><a href="#games">Games</a><a href="#wip">WIP</a><a href="#credits">Credits</a><a href="https://discord.gg/6hHF66cp86" target="_blank" rel="noopener">Studio</a><a href="#join">Join us</a></nav>
- <button class="brand" id="brand" aria-label="Halven Studios">Halven Studios</button>
+ <div class="center"><button class="brand" id="brand" aria-label="Halven Studios">Halven Studios</button><div id="cd" hidden><span id="cd-text"></span><b id="cd-time"></b></div></div>
  <button class="gear" id="gear" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
 </header>
 <div id="bgimg"></div>
@@ -180,17 +191,22 @@ nav a.on::after{transform:scaleX(1)}
  <label class="pick">Top bar text color<input type="color" id="t-pick" value="#ffffff"></label>
  <button class="btn alt" id="t-reset">Reset top bar color</button>
  <p class="hint">Your theme and color are saved and applied every time you visit.</p>
- <div id="dev-entry" hidden>
-  <h4>Developer</h4>
-  <button class="btn alt" id="open-dev">Open developer panel</button>
- </div>
+ <h4>Display</h4>
+ <label>Text size <span id="fs-v">100%</span><input type="range" id="s-fs" min="80" max="130" step="5" value="100"></label>
+ <label>Corner roundness<input type="range" id="s-r" min="0" max="24" step="2" value="10"></label>
+ <label>Font<select id="s-ff"><option value="">Barlow (default)</option><option value="system-ui,-apple-system,'Segoe UI',sans-serif">System</option><option value="Georgia,'Times New Roman',serif">Serif</option><option value="ui-monospace,Menlo,Consolas,monospace">Mono</option></select></label>
+ <label class="chk"><input type="checkbox" id="s-mo"> Reduce motion</label>
+ <label class="chk"><input type="checkbox" id="s-vis"> Hide visit counter</label>
+ <button class="btn alt" id="s-reset">Reset all settings</button>
+ <h4>Developer</h4>
+ <button class="btn alt" id="open-dev">Open developer panel</button>
 </aside>
 <aside class="panel" id="p-dev" hidden aria-label="Developer panel">
  <div class="ph"><h3>Developer panel</h3><button class="x" data-close aria-label="Close">✕</button></div>
  <div id="lock">
-  <h4 id="lock-title">Owner sign-in</h4>
-  <p class="hint" id="lock-msg">Only the site owner can open this panel.</p>
-  <button class="btn main" id="pw-go">Sign in with Google</button>
+  <h4 id="lock-title">Developer password</h4>
+  <label>Password<input type="password" id="pw1" autocomplete="off"></label>
+  <button class="btn main" id="pw-go">Unlock</button>
  </div>
  <div id="devbody" hidden>
  <h4>Add a game</h4>
@@ -203,12 +219,22 @@ nav a.on::after{transform:scaleX(1)}
  <button class="btn main" id="g-add">Add game</button>
  <h4>Your games</h4>
  <div id="g-list"></div>
+ <h4>Countdown</h4>
+ <label>Text<input id="cd-in-text" maxlength="80" placeholder="Launching in"></label>
+ <label>Color<input type="color" id="cd-in-color" value="#ff2d8a"></label>
+ <label>Ends at<input type="datetime-local" id="cd-in-end"></label>
+ <p class="hint">Or leave that empty and set how long from now:</p>
+ <div class="trio"><input type="number" id="cd-d" min="0" placeholder="Days"><input type="number" id="cd-h" min="0" placeholder="Hours"><input type="number" id="cd-m" min="0" placeholder="Mins"></div>
+ <button class="btn main" id="cd-save">Start countdown</button>
+ <button class="btn alt" id="cd-clear">Remove countdown</button>
+ <textarea id="cd-code" readonly hidden></textarea>
+ <p class="hint">Saved in this browser. To show it to every visitor, paste the code above into index.html where it says PUBLIC_COUNTDOWN.</p>
  <h4>Site background</h4>
  <label>Background image<input type="file" id="s-bg" accept="image/*"></label>
  <button class="btn alt" id="s-clear">Remove background</button>
  <p class="hint">Games and images are saved in this browser only.</p>
- <h4>Account</h4>
- <button class="btn alt" id="pw-change">Sign out</button>
+ <h4>Lock</h4>
+ <button class="btn alt" id="pw-change">Lock panel</button>
  </div>
 </aside>
 <div id="toast" role="status"></div>
@@ -225,7 +251,7 @@ nav a.on::after{transform:scaleX(1)}
  try{var s=localStorage.getItem('halven-mode');if(s)setMode(s)}catch(e){}
  document.querySelectorAll('.modes button').forEach(function(b){b.addEventListener('click',function(){setMode(b.dataset.m)})});
 
- function burst(){
+ function burst(){if(root.classList.contains('nomo'))return;
   var c=['#0078f2','#ff2d8a','#27d3b5','#ffd23f','#fff'];
   for(var i=0;i<60;i++){var d=document.createElement('div');d.className='bit';
    d.style.left=Math.random()*100+'vw';d.style.background=c[i%c.length];
@@ -252,7 +278,7 @@ nav a.on::after{transform:scaleX(1)}
  // Egg 4: secret dot
  document.getElementById('secret').addEventListener('click',function(){burst();say('You found the hidden dot.')});
  var K='halven-data',data={games:[],bg:''};
- try{var raw=localStorage.getItem(K);if(raw){var p=JSON.parse(raw);data.games=p.games||[];data.bg=p.bg||''}}catch(e){}
+ try{var raw=localStorage.getItem(K);if(raw){var p=JSON.parse(raw);data.games=p.games||[];data.bg=p.bg||'';if(p.countdown)data.countdown=p.countdown}}catch(e){}
  function save(){try{localStorage.setItem(K,JSON.stringify(data));return true}catch(e){say('Storage is full. Try smaller images.');return false}}
  function $(id){return document.getElementById(id)}
  function shrink(file,max,type){return new Promise(function(res){if(!file)return res('');var fr=new FileReader();fr.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL(type,.82))};im.onerror=function(){res('')};im.src=fr.result};fr.onerror=function(){res('')};fr.readAsDataURL(file)})}
@@ -288,23 +314,18 @@ nav a.on::after{transform:scaleX(1)}
  $('s-bg').addEventListener('change',function(){shrink(this.files[0],1600,'image/jpeg').then(function(u){if(!u)return;var old=data.bg;data.bg=u;if(!save())data.bg=old;render()})});
  $('s-clear').addEventListener('click',function(){data.bg='';save();render()});
  render();
- var OWNER_UID='1QAd8LjUlWYjUsTJDebSsQOM8yz1'; /* After your first sign-in, paste your UID here. */
- var fbOK,fbp=new Promise(function(r){fbOK=r}),isOwner=false;
+ var PWH='fb767e9f052c07974e4557a3e1e9e745f27ce9d6cf323386a9e649ef811bdad6',unlocked=false;
+ function sha(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode('halven-v1:'+s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')})}
  function showDev(){$('lock').hidden=true;$('devbody').hidden=false}
- function ownerState(u){
-  isOwner=!!(u&&OWNER_UID&&u.uid===OWNER_UID);
-  $('dev-entry').hidden=!isOwner;
-  if(isOwner){showDev();return}
-  $('devbody').hidden=true;$('lock').hidden=false;
-  if(!u){$('lock-msg').textContent='Only the site owner can open this panel.';$('pw-go').hidden=false}
-  else if(!OWNER_UID){$('lock-msg').textContent='Signed in. Your UID is '+u.uid+'. Paste it into OWNER_UID in index.html to finish setup.';$('pw-go').hidden=true}
-  else{$('lock-msg').textContent='This account is not the site owner.';$('pw-go').hidden=false}
- }
+ function lockDev(){unlocked=false;$('lock').hidden=false;$('devbody').hidden=true;$('pw1').value=''}
+ $('open-dev').addEventListener('click',function(){unlocked?showDev():lockDev()});
+ document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',lockDev)});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')lockDev()});
  $('pw-go').addEventListener('click',function(){
-  if(!window.firebase||!firebase.auth){say('Sign-in only works on your hosted site.');return}
-  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(){say('Sign-in failed.')})});
- $('pw-change').addEventListener('click',function(){
-  if(window.firebase&&firebase.auth)firebase.auth().signOut().then(function(){closeP()})});
+  if(!window.crypto||!crypto.subtle){say('The password needs a secure (https) page.');return}
+  sha($('pw1').value).then(function(x){if(x===PWH){unlocked=true;showDev()}else say('Wrong password.');$('pw1').value=''})});
+ $('pw1').addEventListener('keydown',function(e){if(e.key==='Enter')$('pw-go').click()});
+ $('pw-change').addEventListener('click',function(){lockDev();closeP()});
 
  function hsl(c){var r=parseInt(c.slice(1,3),16)/255,g=parseInt(c.slice(3,5),16)/255,b=parseInt(c.slice(5,7),16)/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),h=0,s=0,l=(mx+mn)/2,d=mx-mn;if(d){s=d/(1-Math.abs(2*l-1));if(mx===r)h=((g-b)/d)%6;else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h=Math.round(h*60);if(h<0)h+=360}return[h,Math.round(s*100)]}
  function applyCustom(){
@@ -321,21 +342,63 @@ nav a.on::after{transform:scaleX(1)}
  function loadFB(){
   var base='https://www.gstatic.com/firebasejs/10.12.2/';
   function ld(f){return new Promise(function(ok,no){var s=document.createElement('script');s.src=base+f;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
-  ld('firebase-app-compat.js').then(function(){return ld('firebase-auth-compat.js')}).then(function(){return ld('firebase-firestore-compat.js')}).then(function(){
-   firebase.initializeApp(FIREBASE_CONFIG);fbOK();
+  ld('firebase-app-compat.js').then(function(){return ld('firebase-firestore-compat.js')}).then(function(){
+   firebase.initializeApp(FIREBASE_CONFIG);
    var ref=firebase.firestore().collection('site').doc('stats'),first=true;
    try{first=!sessionStorage.getItem('halven-seen');sessionStorage.setItem('halven-seen','1')}catch(e){}
    return (first?ref.set({visits:firebase.firestore.FieldValue.increment(1)},{merge:true}):Promise.resolve()).then(function(){return ref.get()})
   }).then(function(d){showVisits((d.data()||{}).visits||0)}).catch(function(){showVisits(localVisits())})}
- if(FIREBASE_CONFIG){loadFB();fbp.then(function(){firebase.auth().onAuthStateChanged(ownerState)})}else showVisits(localVisits());
+ if(FIREBASE_CONFIG)loadFB();else showVisits(localVisits());
  function applyBar(){var c=null;try{c=localStorage.getItem('halven-bartext')}catch(e){}if(c){root.style.setProperty('--bartext',c);$('t-pick').value=c}else root.style.removeProperty('--bartext')}
  $('t-pick').addEventListener('input',function(){try{localStorage.setItem('halven-bartext',this.value)}catch(e){}root.style.setProperty('--bartext',this.value)});
  $('t-reset').addEventListener('click',function(){try{localStorage.removeItem('halven-bartext')}catch(e){}root.style.removeProperty('--bartext');$('t-pick').value='#ffffff'});
  applyBar();
  var views=['games','wip','credits','join'];
- function route(){var v=location.hash.slice(1);if(v==='owner')openP('p-dev');if(views.indexOf(v)<0)v='home';document.body.setAttribute('data-view',v);document.querySelectorAll('nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+v)});window.scrollTo(0,0)}
+ function route(){var v=location.hash.slice(1);if(views.indexOf(v)<0)v='home';document.body.setAttribute('data-view',v);document.querySelectorAll('nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+v)});window.scrollTo(0,0)}
  window.addEventListener('hashchange',route);route();
- try{console.log('%cHalven Studios','font:800 20px sans-serif','Peeking at the code? We’re hiring.')}catch(e){}
+ var PK='halven-prefs',DEF={fs:100,r:10,ff:'',mo:false,vis:false},pf=Object.assign({},DEF);
+ try{pf=Object.assign(pf,JSON.parse(localStorage.getItem(PK)||'{}'))}catch(e){}
+ function applyPf(){
+  root.style.setProperty('--fs',pf.fs+'%');root.style.setProperty('--r',pf.r+'px');root.style.setProperty('--rb',Math.round(pf.r*.6)+'px');
+  if(pf.ff)root.style.setProperty('--ff',pf.ff);else root.style.removeProperty('--ff');
+  root.classList.toggle('nomo',!!pf.mo);root.classList.toggle('novis',!!pf.vis);
+  $('s-fs').value=pf.fs;$('fs-v').textContent=pf.fs+'%';$('s-r').value=pf.r;$('s-ff').value=pf.ff;$('s-mo').checked=!!pf.mo;$('s-vis').checked=!!pf.vis}
+ function savePf(){try{localStorage.setItem(PK,JSON.stringify(pf))}catch(e){}applyPf()}
+ $('s-fs').addEventListener('input',function(){pf.fs=+this.value;savePf()});
+ $('s-r').addEventListener('input',function(){pf.r=+this.value;savePf()});
+ $('s-ff').addEventListener('change',function(){pf.ff=this.value;savePf()});
+ $('s-mo').addEventListener('change',function(){pf.mo=this.checked;savePf()});
+ $('s-vis').addEventListener('change',function(){pf.vis=this.checked;savePf()});
+ $('s-reset').addEventListener('click',function(){
+  pf=Object.assign({},DEF);
+  try{['halven-prefs','halven-mode','halven-color','halven-bartext'].forEach(function(k){localStorage.removeItem(k)})}catch(e){}
+  root.style.cssText='';$('t-pick').value='#ffffff';$('c-pick').value='#0078f2';setMode('dark');applyPf();say('Settings reset.')});
+ applyPf();
+ var PUBLIC_COUNTDOWN=null; /* To show a countdown to every visitor, paste the code from the Developer panel here. */
+ var cdTimer=null;
+ function getCd(){return PUBLIC_COUNTDOWN||data.countdown||null}
+ function tickCd(){
+  var c=getCd(),el=$('cd');
+  if(!c||!c.end){el.hidden=true;return}
+  el.hidden=false;el.style.setProperty('--cd',c.color||'#0078f2');$('cd-text').textContent=c.text||'';
+  var ms=c.end-Date.now();
+  if(ms<=0){$('cd-time').textContent='Time is up!';return}
+  var s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),sec=s%60;
+  function p(n){return String(n).padStart(2,'0')}
+  $('cd-time').textContent=(d?d+'d ':'')+p(h)+':'+p(m)+':'+p(sec)}
+ function startCdTimer(){clearInterval(cdTimer);tickCd();cdTimer=setInterval(tickCd,1000)}
+ $('cd-save').addEventListener('click',function(){
+  var end=0,v=$('cd-in-end').value;
+  if(v)end=new Date(v).getTime();
+  else{var ms=((+$('cd-d').value||0)*86400+(+$('cd-h').value||0)*3600+(+$('cd-m').value||0)*60)*1000;if(ms>0)end=Date.now()+ms}
+  if(!end||end<=Date.now()){say('Pick a future date, or enter how long from now.');return}
+  data.countdown={text:$('cd-in-text').value.trim(),color:$('cd-in-color').value,end:end};
+  if(save()){var code=$('cd-code');code.value='var PUBLIC_COUNTDOWN='+JSON.stringify(data.countdown)+';';code.hidden=false;say('Countdown started.')}
+  startCdTimer()});
+ $('cd-clear').addEventListener('click',function(){delete data.countdown;save();$('cd-code').hidden=true;startCdTimer();say('Countdown removed.')});
+ startCdTimer();
+ try{console.log('%cHalven Studios','font:800 20px sans-serif','Peeking at the code? ')}catch(e){}
 })();
 </script>
-</
+</body>
+</html>
